@@ -14,7 +14,7 @@ export const App = () => {
     //   React homework template
     // </div>
     <div>
-      <Feedbacks />
+      <Feedbacks initialGood={5} initialNeutral={2} initialBad={1} />
     </div>
   );
 };
