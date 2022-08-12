@@ -1,6 +1,8 @@
-import React from 'react';
-
-const Controls = ({ onIncrementGood, onIncrementNeutral, onIncrementBad }) => {
+const FeedbackOptions = ({
+  onIncrementGood,
+  onIncrementNeutral,
+  onIncrementBad,
+}) => {
   return (
     <div className="Feedback__controls">
       <button type="button" onClick={onIncrementGood}>
@@ -16,4 +18,4 @@ const Controls = ({ onIncrementGood, onIncrementNeutral, onIncrementBad }) => {
   );
 };
 
-export default Controls;
+export default FeedbackOptions;
