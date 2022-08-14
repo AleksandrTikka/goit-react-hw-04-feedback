@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Section from 'components/Section/Section';
-import FeedbackOptions from 'components/Controls/Controls';
-import Statistics from 'components/Statistics/Statistics';
-import Notification from 'components/Notification/Notification';
+import Section from 'components/Section';
+import FeedbackOptions from 'components/FeedbackOptions';
+import Statistics from 'components/Statistics';
+import Notification from 'components/Notification';
 
 // import { number } from 'prop-types';
 
@@ -26,29 +26,35 @@ class Feedbacks extends React.Component {
     bad: this.props.initialBad,
   };
 
-  handleIncrementGood = evt => {
-    console.log('кликнул кнопку Гуд');
-    console.log(evt);
-    this.setState(prevState => {
-      return {
-        good: prevState.good + 1,
-      };
-    });
-  };
-  handleIncrementNeutral = () => {
-    console.log('кликнул кнопку Нейтрал');
+  handleIncrementFeedback = feedback => {
     this.setState(prevState => ({
-      neutral: prevState.neutral + 1,
+      [feedback]: prevState[feedback] + 1,
     }));
   };
-  handleIncrementBad = () => {
-    console.log('кликнул кнопку Бэд');
-    this.setState(prevState => {
-      return {
-        bad: prevState.bad + 1,
-      };
-    });
-  };
+
+  // handleIncrementGood = evt => {
+  //   console.log('кликнул кнопку Гуд');
+  //   console.log(evt);
+  //   this.setState(prevState => {
+  //     return {
+  //       good: prevState.good + 1,
+  //     };
+  //   });
+  // };
+  // handleIncrementNeutral = () => {
+  //   console.log('кликнул кнопку Нейтрал');
+  //   this.setState(prevState => ({
+  //     neutral: prevState.neutral + 1,
+  //   }));
+  // };
+  // handleIncrementBad = () => {
+  //   console.log('кликнул кнопку Бэд');
+  //   this.setState(prevState => {
+  //     return {
+  //       bad: prevState.bad + 1,
+  //     };
+  //   });
+  // };
 
   countTotalFeedback() {
     return Object.values(this.state).reduce(
@@ -66,9 +72,11 @@ class Feedbacks extends React.Component {
       <>
         <Section title="Please leave feedback">
           <FeedbackOptions
-            onIncrementGood={this.handleIncrementGood}
-            onIncrementNeutral={this.handleIncrementNeutral}
-            onIncrementBad={this.handleIncrementBad}
+            onLeaveFeedback={this.handleIncrementFeedback}
+            options={this.state}
+            // onIncrementGood={this.handleIncrementGood}
+            // onIncrementNeutral={this.handleIncrementNeutral}
+            // onIncrementBad={this.handleIncrementBad}
           />
         </Section>
         {this.countTotalFeedback() > 0 ? (

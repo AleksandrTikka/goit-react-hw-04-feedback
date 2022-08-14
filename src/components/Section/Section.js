@@ -2,7 +2,7 @@
 
 const Section = ({ title, children }) => (
   <div>
-    <div>{title}</div>
+    <h2>{title}</h2>
     {children}
   </div>
 );
