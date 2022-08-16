@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Box } from './Feedbacks.styled';
 import Section from 'components/Section';
 import FeedbackOptions from 'components/FeedbackOptions';
 import Statistics from 'components/Statistics';
@@ -69,7 +70,7 @@ class Feedbacks extends React.Component {
 
   render() {
     return (
-      <>
+      <Box>
         <Section title="Please leave feedback">
           <FeedbackOptions
             onLeaveFeedback={this.handleIncrementFeedback}
@@ -79,8 +80,9 @@ class Feedbacks extends React.Component {
             // onIncrementBad={this.handleIncrementBad}
           />
         </Section>
-        {this.countTotalFeedback() > 0 ? (
-          <Section title="Statistics">
+
+        <Section title="Statistics">
+          {this.countTotalFeedback() > 0 ? (
             <Statistics
               good={this.state.good}
               neutral={this.state.neutral}
@@ -88,11 +90,11 @@ class Feedbacks extends React.Component {
               total={this.countTotalFeedback()}
               positivePercentage={this.countPositiveFeedbackPercentage()}
             />
-          </Section>
-        ) : (
-          <Notification message="There is no feedback"></Notification>
-        )}
-      </>
+          ) : (
+            <Notification message="There is no feedback"></Notification>
+          )}
+        </Section>
+      </Box>
     );
   }
 }

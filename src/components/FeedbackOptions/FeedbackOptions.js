@@ -1,6 +1,7 @@
+import { List } from './FeedbackOption.styled';
 const FeedbackOptions = ({ onLeaveFeedback, options }) => {
   return (
-    <ul>
+    <List>
       {Object.keys(options).map(option => (
         <li key={option}>
           <button type="button" onClick={() => onLeaveFeedback(option)}>
@@ -8,7 +9,7 @@ const FeedbackOptions = ({ onLeaveFeedback, options }) => {
           </button>
         </li>
       ))}
-    </ul>
+    </List>
   );
 };
 

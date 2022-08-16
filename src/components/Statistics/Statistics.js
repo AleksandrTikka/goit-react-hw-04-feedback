@@ -1,13 +1,14 @@
 // import Notification from 'components/Notification/Notification';
+import { List, Item } from './Statistics.styled';
 const Statistics = ({ good, neutral, bad, total, positivePercentage }) => {
   return (
-    <div>
-      <div>Good: {good}</div>
-      <div>Neutral: {neutral}</div>
-      <div>Bad: {bad}</div>
-      <div>Total: {total}</div>
-      <div>Positive feedback: {positivePercentage} %</div>
-    </div>
+    <List>
+      <Item>Good: {good}</Item>
+      <Item>Neutral: {neutral}</Item>
+      <Item>Bad: {bad}</Item>
+      <Item>Total: {total}</Item>
+      <Item>Positive feedback: {positivePercentage} %</Item>
+    </List>
   );
 };
 export default Statistics;
