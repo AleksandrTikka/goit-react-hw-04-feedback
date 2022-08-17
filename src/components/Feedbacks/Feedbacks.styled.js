@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
 
 export const Box = styled.div`
-  padding: 10px;
+  padding: ${p => p.theme.space[5]}px;
   text-align: center;
   width: 500px;
-  border: 2px solid grey;
-  margin-left: auto;
-  margin-right: auto;
-  background: linear-gradient(black, red);
-  color: white;
+  border: ${p => p.theme.borders.normal} ${p => p.theme.colors.border};
+  border-radius: ${p => p.theme.radii.md};
+
+  background: ${props => props.theme.colors.bgFeedback};
+  color: ${props => props.theme.colors.text};
 `;

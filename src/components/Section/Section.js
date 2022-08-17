@@ -1,8 +1,9 @@
-// import React from 'react';
+import React from 'react';
+import { Heading } from './Section.styled';
 
 const Section = ({ title, children }) => (
   <div>
-    <h2>{title}</h2>
+    <Heading>{title}</Heading>
     {children}
   </div>
 );

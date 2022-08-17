@@ -75,9 +75,6 @@ class Feedbacks extends React.Component {
           <FeedbackOptions
             onLeaveFeedback={this.handleIncrementFeedback}
             options={this.state}
-            // onIncrementGood={this.handleIncrementGood}
-            // onIncrementNeutral={this.handleIncrementNeutral}
-            // onIncrementBad={this.handleIncrementBad}
           />
         </Section>
 
