@@ -1,5 +1,6 @@
 // import Notification from 'components/Notification/Notification';
 import { List, Item } from './Statistics.styled';
+import PropTypes from 'prop-types';
 const Statistics = ({ good, neutral, bad, total, positivePercentage }) => {
   return (
     <List>
@@ -11,4 +12,13 @@ const Statistics = ({ good, neutral, bad, total, positivePercentage }) => {
     </List>
   );
 };
+
+Statistics.propTypes = {
+  good: PropTypes.number.isRequired,
+  neutral: PropTypes.number.isRequired,
+  bad: PropTypes.number.isRequired,
+  total: PropTypes.number,
+  positivePercentage: PropTypes.number,
+};
+
 export default Statistics;
