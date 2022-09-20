@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import { useState } from 'react';
+// import PropTypes from 'prop-types';
 
 import { Box } from './Feedbacks.styled';
 import Section from 'components/Section';
@@ -9,68 +9,69 @@ import Notification from 'components/Notification';
 
 // import { number } from 'prop-types';
 
-class Feedbacks extends React.Component {
-  static defaultProps = {
-    initialGood: 0,
-    initialNeutral: 0,
-    initialBad: 0,
+function Feedbacks() {
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
+  const feedback = [good, neutral, bad];
+
+  // const handleIncrementGood = () => {
+  //   setGood(prevState => prevState + 1);
+  // };
+  // const handleIncrementNeutral = () => {
+  //   setNeutral(prevState => prevState + 1);
+  // };
+  // const handleIncrementBad = () => {
+  //   setBad(prevState => prevState + 1);
+  // };
+
+  const countTotalFeedback = () => {
+    return feedback.reduce((prevValue, el) => prevValue + el, 0);
   };
 
-  static propTypes = {
-    initialGood: PropTypes.number.isRequired,
-    initialNeutral: PropTypes.number.isRequired,
-    initialBad: PropTypes.number.isRequired,
+  const handleIncrementFeedback = type => {
+    switch (type) {
+      case 'good':
+        setGood(prevState => prevState + 1);
+        break;
+      case 'neutral':
+        setNeutral(prevState => prevState + 1);
+        break;
+      case 'bad':
+        setBad(prevState => prevState + 1);
+        break;
+      default:
+        throw new Error(`Unknown feedback type - ${type}`);
+    }
+  };
+  const countPositiveFeedbackPercentage = () => {
+    return Math.round((100 * good) / countTotalFeedback());
   };
 
-  state = {
-    good: this.props.initialGood,
-    neutral: this.props.initialNeutral,
-    bad: this.props.initialBad,
-  };
+  return (
+    <Box>
+      <Section title="Please leave feedback">
+        <FeedbackOptions
+          onLeaveFeedback={handleIncrementFeedback}
+          options={['good', 'neutral', 'bad']}
+        />
+      </Section>
 
-  handleIncrementFeedback = feedback => {
-    this.setState(prevState => ({
-      [feedback]: prevState[feedback] + 1,
-    }));
-  };
-
-  countTotalFeedback() {
-    return Object.values(this.state).reduce(
-      (prevValue, el) => prevValue + el,
-      0
-    );
-  }
-
-  countPositiveFeedbackPercentage() {
-    return Math.round((100 * this.state.good) / this.countTotalFeedback());
-  }
-
-  render() {
-    return (
-      <Box>
-        <Section title="Please leave feedback">
-          <FeedbackOptions
-            onLeaveFeedback={this.handleIncrementFeedback}
-            options={this.state}
+      <Section title="Statistics">
+        {countTotalFeedback() > 0 ? (
+          <Statistics
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={countTotalFeedback()}
+            positivePercentage={countPositiveFeedbackPercentage()}
           />
-        </Section>
-
-        <Section title="Statistics">
-          {this.countTotalFeedback() > 0 ? (
-            <Statistics
-              good={this.state.good}
-              neutral={this.state.neutral}
-              bad={this.state.bad}
-              total={this.countTotalFeedback()}
-              positivePercentage={this.countPositiveFeedbackPercentage()}
-            />
-          ) : (
-            <Notification message="There is no feedback" />
-          )}
-        </Section>
-      </Box>
-    );
-  }
+        ) : (
+          <Notification message="There is no feedback" />
+        )}
+      </Section>
+    </Box>
+  );
 }
 
 export default Feedbacks;
